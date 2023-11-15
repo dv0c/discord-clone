@@ -1,9 +1,10 @@
 "use client";
-import { ServerWithMembersWithProfiles } from "@/types";
+
 import { ChannelType, MemberRole } from "@prisma/client";
-import { FC } from "react";
-import { ActionTooltip } from "../action-tooltip";
 import { Plus, Settings } from "lucide-react";
+
+import { ServerWithMembersWithProfiles } from "@/types";
+import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
 
 interface ServerSectionProps {
@@ -12,15 +13,15 @@ interface ServerSectionProps {
   sectionType: "channels" | "members";
   channelType?: ChannelType;
   server?: ServerWithMembersWithProfiles;
-}
+};
 
-const ServerSection: FC<ServerSectionProps> = ({
+export const ServerSection = ({
   label,
+  role,
   sectionType,
   channelType,
-  role,
   server,
-}) => {
+}: ServerSectionProps) => {
   const { onOpen } = useModal();
 
   return (
@@ -49,7 +50,5 @@ const ServerSection: FC<ServerSectionProps> = ({
         </ActionTooltip>
       )}
     </div>
-  );
-};
-
-export default ServerSection;
+  )
+}
