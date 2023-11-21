@@ -20,20 +20,21 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
+import { SignOutButton } from "@clerk/nextjs";
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    message: "Server name is required."
+    message: "Server name is required.",
   }),
   imageUrl: z.string().min(1, {
-    message: "Server image is required."
-  })
+    message: "Server image is required.",
+  }),
 });
 
 export const InitialModal = () => {
@@ -50,7 +51,7 @@ export const InitialModal = () => {
     defaultValues: {
       name: "",
       imageUrl: "",
-    }
+    },
   });
 
   const isLoading = form.formState.isSubmitting;
@@ -65,7 +66,7 @@ export const InitialModal = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   if (!isMounted) {
     return null;
@@ -79,7 +80,8 @@ export const InitialModal = () => {
             Customize your server
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Give your server a personality with a name and an image. You can always change it later.
+            Give your server a personality with a name and an image. You can
+            always change it later.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -108,9 +110,7 @@ export const InitialModal = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                    >
+                    <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
                       Server name
                     </FormLabel>
                     <FormControl>
@@ -126,8 +126,21 @@ export const InitialModal = () => {
                 )}
               />
             </div>
-            <DialogFooter className="bg-gray-100 px-6 py-4">
-              <Button variant="primary" disabled={isLoading}>
+            <DialogFooter className="bg-gray-100 flex px-6 py-4">
+              <SignOutButton>
+                <Button
+                  type="button"
+                  className="mr-auto"
+                  variant={"destructive"}
+                >
+                  Sign out
+                </Button>
+              </SignOutButton>
+              <Button
+                variant="primary"
+                className="ml-auto"
+                disabled={isLoading}
+              >
                 Create
               </Button>
             </DialogFooter>
@@ -135,5 +148,5 @@ export const InitialModal = () => {
         </Form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
