@@ -36,9 +36,9 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
     },
   });
   
-  useEffect(() => {
-    form.setFocus("content");
-  }, [form.formState.isSubmitting]);
+  // useEffect(() => {
+  //   form.setFocus("content");
+  // }, [form.formState.isSubmitting]);
 
   const isLoading = form.formState.isSubmitting;
   
@@ -53,7 +53,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
       await axios.post(url, values)
 
       form.reset();
-      router.refresh();
+      // router.refresh();
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +65,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
         <FormField
           control={form.control}
           name="content"
-          disabled={isLoading}
+          // disabled={isLoading}
           render={({ field }) => (
             <FormItem>
               <FormControl>
